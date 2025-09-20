@@ -1,0 +1,51 @@
+:root {
+  /* colour palette */
+  --black: hsl(210, 65%, 10%);
+  --dark-navy: hsl(210, 43%, 17%);
+  --navy: hsl(214, 35%, 36%);
+  --light-navy: hsl(214, 25%, 54%);
+  --gray: hsl(210, 14%, 88%);
+  --color-accent: hsl(34, 90%, 55%);
+
+  /* text colours */
+  --text-primary: hsl(0, 0%, 10%);
+  --text-secondary: hsl(215, 14%, 65%);
+  --text-heading: hsl(0, 0%, 0%);
+
+  /* darkmode text colours */
+  --d-text-primary: hsl(0, 0%, 88%);
+  --d-text-secondary: hsl(215, 14%, 65%);
+  --d-text-heading: hsl(0, 0%, 100%);
+}
+
+#noWorkoutsMessage {
+  border: 2px dashed var(--black);
+  height: 400px; 
+  color:red; 
+  background-color: hsla(210, 14%, 88%, 0.1);
+}
+
+.create-workout-btn {
+  color: var(--text-primary) !important;
+  background-color: var(--gray);
+}
+.create-workout-btn:hover {
+  text-decoration: underline !important;
+}
+
+.workout-card {
+  border: 2px solid var(--black);
+  border-radius: 32px;
+}
+
+.edit-exercise-btn {
+  border: none;
+  background: hsla(213, 100%, 50%, 0.4);
+  font-size: 1.25rem;
+}
+
+.delete-exercise-btn {
+  border: none;
+  background: hsla(0, 100%, 50%, 0.4);
+  font-size: 1.25rem;
+}
