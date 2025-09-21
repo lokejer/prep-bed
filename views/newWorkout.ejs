@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- DM Sans font -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
   <!-- link bootstrap / bs icons / bs js -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -12,29 +15,42 @@
   <!-- link stylesheets -->
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/newWorkout.css">
-  <script defer src="/newWorkout.js"></script>
+  <script defer src="/js/newWorkout.js"></script>
 
   <title>Workouts</title>
 </head>
-<body>
+<body data-bs-theme="dark">
 
   <main>
 
-    <section class="container-lg py-5 d-flex flex-column align-items-center">
+    <section class="position-relative container-fluid container-lg py-5 d-flex flex-column align-items-center">
       
-      <a class="mb-4" href="/workouts">See All Workouts</a>
-      <h2>Welcome Back, <%= locals.name %>! Log each exercise below.</h2>
+      <a class="back-to-workouts-link position-absolute top-0 start-0 m-3 text-decoration-none text-primary" href="/workouts">
+        <i class="bi bi-arrow-up-left me-1"></i>WORKOUTS
+      </a>
 
-      <div class="col-md-6 col-10 d-flex flex-column my-5 px-3 py-5 border border-dark rounded-3 shadow-sm">
+      <div class="mb-2 text-center">
+        <h2 class="display-5 text-heading">Welcome Back, <%= locals.name %>!</h2>
+        <h4 class="fw-normal text-secondary">Log each exercise below.</h4>
+      </div>
+
+      <div class="form-container col-md-6 d-flex flex-column px-md-3 px-2 py-5 border border-dark rounded-4 shadow-lg">
       
         <form
-          action="/workouts/add-exercise" 
+          action="/workouts/add-exercise"
           method="POST"
         >
           
-          <label for="exerciseName">Name & Weight: </label>
-          <input class="form-control mb-1" type="text" id="exerciseName" name="exerciseName" placeholder="e.g Bicep Curls" required>
-          <input class="form-control mb-3" type="text" id="exerciseWeight" name="exerciseWeight" placeholder="e.g 20 (kg) or BW (bodyweight)">
+        <div class="row">
+          <div class="col-md-6 flex-wrap">
+              <label for="exerciseName">Exercise Name:</label>
+              <input autofocus class="form-control mb-1" type="text" id="exerciseName" name="exerciseName" placeholder="e.g Bicep Curls" required>
+            </div>
+            <div class="col-md-3 flex-wrap">
+              <label for="exerciseWeight">Weight&nbsp;(kg):</label>
+              <input class="form-control mb-3 text-center" type="text" id="exerciseWeight" name="exerciseWeight" placeholder="20">
+            </div>
+          </div>
 
           <label for="set1">Set 1: </label>
           <input class="form-control" type="number" id="set1" name="set1" placeholder="e.g 12 (reps)" required>
@@ -48,12 +64,12 @@
           <input class="form-control mb-1" type="number" id="set3" name="set3" placeholder="e.g 8 (reps)">
           <br><br>
 
-          <button class="btn btn-light border border-dark w-100 mb-2 py-2 rounded-3" type="submit">Add Exercise</button>
+          <button class="btn btn-outline-light w-100 mb-2 py-2 rounded-3" type="submit">Add Exercise</button>
           
         </form>
 
         <form action="/workouts/create-workout" method="POST">
-          <button class="btn btn-outline-success w-100 mb-2 py-2 rounded-3 fw-bold" type="submit">Create Workout</button>
+          <button class="btn end-workout-btn w-100 mb-1 py-2 rounded-3 fw-bold text-primary bg-accent" type="submit">End Workout</button>
         </form>
 
       </div>

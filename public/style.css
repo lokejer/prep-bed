@@ -1,19 +1,38 @@
 :root {
-  /* colour palette */
-  --black: hsl(210, 65%, 10%);
+  /* backgrounds */
+  --black: hsl(222, 20%, 5%);              /* #0a0c10 */
+  --dark-surface: hsl(220, 14%, 12%);      /* #1a1d23 */
+  --elevated-surface: hsl(220, 15%, 20%);  /* #2a2f38 */
+
+  /*  */
   --dark-navy: hsl(210, 43%, 17%);
   --navy: hsl(214, 35%, 36%);
   --light-navy: hsl(214, 25%, 54%);
   --gray: hsl(210, 14%, 88%);
-  --color-accent: hsl(34, 90%, 55%);
-
-  /* text colours */
-  --text-primary: hsl(0, 0%, 10%);
-  --text-secondary: hsl(215, 14%, 65%);
-  --text-heading: hsl(0, 0%, 0%);
+  --color-accent: hsl(25, 90%, 55%);
+  --t-color-accent: hsla(16, 90%, 55%, 0.5);
 
   /* darkmode text colours */
-  --d-text-primary: hsl(0, 0%, 88%);
-  --d-text-secondary: hsl(215, 14%, 65%);
-  --d-text-heading: hsl(0, 0%, 100%);
+  --text-primary: hsl(0, 0%, 88%);
+  --text-secondary: hsl(215, 14%, 65%);
+  --text-heading: hsl(0, 0%, 100%);
 }
+
+body {
+  background-color: var(--dark-surface);
+  font-family: 'DM Sans', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-heading) !important;
+}
+
+p, span, label, li {
+  color: var(--text-primary) !important;
+}
+
+/* BOOTSTRAP UTILS */
+.text-heading { color: var(--text-heading) !important; }
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.bg-accent { background-color: var(--color-accent) !important; }

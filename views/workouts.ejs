@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- DM Sans font -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
   <!-- link bootstrap / bs icons / bs js -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -13,11 +16,11 @@
   <!-- NOTE: ../public/style/css is wrong, since app.use(express.static("public")) makes public the Root folder -->
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/workouts.css">
-  <script defer src="/workouts.js"></script>
+  <script defer src="/js/workouts.js"></script>
 
   <title>Workouts</title>
 </head>
-<body>
+<body data-bs-theme="dark">
 
   <main>
 
@@ -25,17 +28,17 @@
 
       <!-- page header -->
       <div class="d-flex justify-content-between align-items-center">
-        <h1>Your Workouts</h1>
-        <a class="create-workout-btn p-2 rounded-3 shadow-sm text-decoration-none" href="/workouts/new">
-          <i class="bi bi-plus me-1"></i>New Workout
+        <h1 class="flex-wrap">Your&nbsp;Workouts</h1>
+        <a class="flex-wrap p-2 rounded-3 shadow-sm text-decoration-none text-primary bg-accent" href="/workouts/new">
+          <i class="bi bi-plus me-1"></i>NEW&nbsp;WORKOUT
         </a>
       </div>
       
       <!-- message if no workouts yet -->
       <% if (workouts.length === 0) { %>
         <div id="noWorkoutsMessage" class="d-flex flex-column justify-content-center align-items-center rounded-2">
-          <h4 class="fs-3">No workouts yet</h4>
-          <a class="p-2 border rounded-3 shadow-sm text-decoration-none" href="/workouts/new">
+          <h4 class="fs-3">no workouts yet... :&#40;</h4>
+          <a class="p-2 border rounded-3 shadow-sm text-decoration-none text-secondary" href="/workouts/new">
             <i class="bi bi-plus me-1"></i>Add Workout
           </a>
         </div>
@@ -46,19 +49,19 @@
 
         <% workouts.forEach(w => { %>
 
-          <div class="mt-1 mb-3 p-3 workout-card">
+          <div class="mt-1 mb-3 p-3 shadow-lg workout-card">
             
             <!-- each workout's header -->
-            <h3>Workout on <%= w.date %>
-              <form class="d-inline" action="/workouts/<%= w.id %>?_method=DELETE" method="POST">
-                <button type="submit"><i class="bi bi-x"></i></button>
+            <h3 class="display-6">Workout on <%= w.date %>
+              <form class="ms-auto d-inline float-end delete-workout-btn" action="/workouts/<%= w.id %>?_method=DELETE" method="POST">
+                <button type="submit"><i class="bi bi-x text-primary"></i></button>
               </form>
             </h3>
 
             <% w.exercises.forEach((exercise, exerciseIndex) => { %>
 
               <!-- exercise header -->
-              <h4><%= exercise.name %> 
+              <h4 class="fw-normal"><%= exercise.name %> 
                 <span class="text-secondary fs-6">
                   (
                     <%= exercise.weight %>
@@ -107,7 +110,7 @@
       </div>
 
       <!-- edit exercise modal -->
-      <div class="modal fade" id="editExerciseModal" tabindex="-1" aria-hidden="true">
+      <div class="modal fade" id="editExerciseModal" data-bs-theme="dark" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <form id="editExerciseForm" method="POST">

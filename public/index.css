@@ -1,0 +1,13 @@
+.links-container a {
+  text-decoration: none;
+  border: 2px solid var(--black);
+  border-radius: 32px;
+  background-color: hsla(214, 35%, 36%);
+  color: var(--text-heading);
+}
+
+.username-input {
+  border: none;
+  border-bottom: 1.6px solid var(--black);
+  text-align: center;
+}

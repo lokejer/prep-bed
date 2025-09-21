@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- DM Sans font -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
   <!-- link bootstrap / bs icons / bs js -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -15,20 +18,32 @@
 
   <title>Home</title>
 </head>
-<body>
+<body data-bs-theme="dark">
 
   <main>
 
-    <section class="container-md">
+    <section class="min-vh-100 container-md d-flex flex-column justify-content-center py-5">
 
       <!-- the purpose of "locals." is to ensure no error is thrown if the "text" variable is not sent from server.js -->
-      <h1>Hello there!</h1>
-      <a href="/workouts">View Workouts</a>
-      <a href="/workouts/new">Add New Set</a>
+      <div class="text-center">
 
-      <form action="/create-username" method="POST">
-        <input class="username-input" type="text" name="username" placeholder="your name">
-      </form>
+        <h1 class="display-4 mb-3">Hello there!</h1>
+
+        <div class="form-container">
+  
+          <form action="/create-username" method="POST">
+            <input class="username-input py-1" type="text" name="username" placeholder="your name">
+          </form>
+  
+        </div>
+
+        <div class="links-container mt-5">
+          <a class="px-2 py-1" href="/workouts"><i class="bi bi-eye me-1"></i>WORKOUTS</a>
+          <a class="px-2 py-1" href="/workouts/new"><i class="bi bi-clipboard2-plus me-1"></i>NEW SET</a>
+        </div>
+
+      </div>
+
 
     </section>
 
