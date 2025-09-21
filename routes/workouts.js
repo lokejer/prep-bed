@@ -6,17 +6,21 @@ let exercises = [];
 
 // route for /workouts/new
 router.get('/new', (req, res) => {
-  res.render('newWorkout', { name: "User" });
+  res.render('newWorkout', { 
+    name: req.query.name || "User",
+    added: req.query.added // will be "1" if redirected from endpoint '/add-exercise'
+  });
 });
 
 // log exercises into my new workout
 router.post('/add-exercise', (req, res) => {
   console.log(req.body) // this is just an object of all the labels&inputs you submitted in the form
-  let {exerciseName, set1, set2, set3} = req.body;
+  let {exerciseName, exerciseWeight, set1, set2, set3} = req.body;
 
   // add exercises to the current workout
   exercises.push({ 
     name: exerciseName,
+    weight: exerciseWeight,
     sets: [
       { setNumber: 1, reps: Number(set1) },
       ...(set2 ? [{ setNumber: 2, reps: Number(set2) }] : []),
@@ -25,8 +29,25 @@ router.post('/add-exercise', (req, res) => {
   });
 
   // continue to show form on-screen so user can add more exercises if needed
-  console.log(`Exercise "${exerciseName}" added successfully.`);
-  res.redirect('/workouts/new');
+  console.log(`${exerciseName} (${exerciseWeight}) created successfully.`);
+  res.redirect('/workouts/new?added=1');
+});
+
+// DEV USAGE: create sample workout (for testing)
+router.post('/dev-workout', (req, res) => {
+  workouts.push(
+    {
+      id: 1,
+      date: '2025-09-21',
+      exercises: [
+        { name: 'Pullups', weight: 'BW', sets: [3, 3, 2] },
+        { name: 'Bicep Curls', weight: 8, sets: [10, 10, 9] },
+        { name: 'one set', weight: 96, sets: [5] },
+        { name: 'Tricep Pulldowns', weight: 27, sets: [10, 8, 5] },
+        { name: 'test', weight: 68, sets: [5, 5] }
+      ]
+    }
+  )
 });
   
 // create workout
@@ -40,11 +61,15 @@ router.post('/create-workout', (req, res) => {
 
   exercises.forEach(e => newWorkout.exercises.push(e));
   console.log(newWorkout)
-  
-  workouts.push(newWorkout);
-  exercises = [];
-  console.log("Workout created", workouts);
-  res.redirect('/workouts');
+    
+  if (newWorkout.exercises.length > 0) {  
+    workouts.push(newWorkout);
+    exercises = [];
+    console.log("Workout created", workouts);
+    res.redirect('/workouts');
+  } else {
+    res.send("Cannot create empty workout!");
+  }
 })
 
 // edit/delete exercises
@@ -53,7 +78,7 @@ router.route('/:workoutId/edit-exercise/:exerciseIndex')
   // edit exercise details (name, sets&reps)
   .put((req, res) => {
     const { workoutId, exerciseIndex } = req.params;
-    const { name, set1, set2, set3 } = req.body;
+    const { name, weight, set1, set2, set3 } = req.body;
 
     const workout = workouts.find(w => w.id === parseInt(workoutId));
     if (!workout) return res.status(404).send("Workout not found");
@@ -63,6 +88,7 @@ router.route('/:workoutId/edit-exercise/:exerciseIndex')
 
     // update name
     exercise.name = name;
+    exercise.weight = weight;
 
     // update sets & reps
     const updateSet = (setsArray, setNumber, reps) => {

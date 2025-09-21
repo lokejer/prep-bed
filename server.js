@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.post('/create-username', (req, res) => {
+  let { username } = req.body;
+  res.redirect(`/workouts/new?name=${encodeURIComponent(username)}`)
+});
+
 const workoutRouter = require("./routes/workouts.js");
 
 app.use('/workouts', workoutRouter);

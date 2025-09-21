@@ -13,7 +13,7 @@
   <!-- NOTE: ../public/style/css is wrong, since app.use(express.static("public")) makes public the Root folder -->
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/workouts.css">
-  <script defer src="/script.js"></script>
+  <script defer src="/workouts.js"></script>
 
   <title>Workouts</title>
 </head>
@@ -58,7 +58,13 @@
             <% w.exercises.forEach((exercise, exerciseIndex) => { %>
 
               <!-- exercise header -->
-              <h4><%= exercise.name %>
+              <h4><%= exercise.name %> 
+                <span class="text-secondary fs-6">
+                  (
+                    <%= exercise.weight %>
+                    <%= exercise.weight === "BW" ? "" : "kg" %>
+                  )
+                </span>
                 <form class="d-inline" action="/workouts/<%= w.id %>/edit-exercise/<%= exerciseIndex %>?_method=PUT" method="POST">
                   
                   <!-- button opens the edit exercise modal -->
@@ -70,6 +76,7 @@
                     data-workout-id="<%= w.id %>"
                     data-exercise-id="<%= exerciseIndex %>"
                     data-exercise-name="<%= exercise.name %>"
+                    data-exercise-weight="<%= exercise.weight %>"
                     data-set1-reps="<%= exercise.sets[0] ? exercise.sets[0].reps : '' %>"
                     data-set2-reps="<%= exercise.sets[1] ? exercise.sets[1].reps : '' %>"
                     data-set3-reps="<%= exercise.sets[2] ? exercise.sets[2].reps : '' %>"
@@ -116,6 +123,11 @@
                 <div class="mb-3">
                   <label class="form-label">Exercise Name</label>
                   <input type="text" class="form-control" id="exerciseName" name="name">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Weight (kg)</label>
+                  <input type="text" class="form-control" id="exerciseWeight" name="weight">
                 </div>
 
                 <div class="mb-3">
