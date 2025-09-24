@@ -29,16 +29,18 @@
       <!-- page header -->
       <div class="d-flex justify-content-between align-items-center">
         <h1 class="flex-wrap">Your&nbsp;Workouts</h1>
-        <a class="flex-wrap p-2 rounded-3 shadow-sm text-decoration-none text-primary bg-accent" href="/workouts/new">
-          <i class="bi bi-plus me-1"></i>NEW&nbsp;WORKOUT
+        <a class="create-workout-btn flex-wrap p-2 rounded-3 shadow-sm text-decoration-none text-primary bg-accent" href="/workouts/new">
+          <i class="bi bi-plus me-1"></i><span class="d-none d-md-inline">NEW&nbsp;WORKOUT</span>
         </a>
       </div>
+
+      <hr class="mb-4" style="border-width: 3px;">
       
       <!-- message if no workouts yet -->
       <% if (workouts.length === 0) { %>
         <div id="noWorkoutsMessage" class="d-flex flex-column justify-content-center align-items-center rounded-2">
           <h4 class="fs-3">no workouts yet... :&#40;</h4>
-          <a class="p-2 border rounded-3 shadow-sm text-decoration-none text-secondary" href="/workouts/new">
+          <a class="create-workout-btn p-2 border rounded-3 shadow-sm text-decoration-none text-secondary" href="/workouts/new">
             <i class="bi bi-plus me-1"></i>Add Workout
           </a>
         </div>

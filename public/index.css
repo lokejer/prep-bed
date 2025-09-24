@@ -11,3 +11,9 @@
   border-bottom: 1.6px solid var(--black);
   text-align: center;
 }
+
+.username-submit-btn {
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+}

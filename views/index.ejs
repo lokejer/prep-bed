@@ -29,15 +29,16 @@
 
         <h1 class="display-4 mb-3">Hello there!</h1>
 
-        <div class="form-container">
+        <div class="form-container d-flex justify-content-center gap-1">
   
-          <form action="/create-username" method="POST">
+          <form action="/create-username" method="POST" class="d-flex align-items-center">
             <input class="username-input py-1" type="text" name="username" placeholder="your name">
+            <button class="username-submit-btn" type="submit"><i class="bi bi-arrow-right-circle-fill"></i></button>
           </form>
   
         </div>
 
-        <div class="links-container mt-5">
+        <div class="d-none links-container mt-5">
           <a class="px-2 py-1" href="/workouts"><i class="bi bi-eye me-1"></i>WORKOUTS</a>
           <a class="px-2 py-1" href="/workouts/new"><i class="bi bi-clipboard2-plus me-1"></i>NEW SET</a>
         </div>
