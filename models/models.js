@@ -1,4 +1,4 @@
-const { sequelize, DataTypes } = require("./db");
+const { pool, sequelize, DataTypes } = require('./db');
 
 // Workout table
 const Workout = sequelize.define("Workout", {
