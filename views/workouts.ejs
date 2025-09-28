@@ -29,9 +29,51 @@
       <!-- page header -->
       <div class="d-flex justify-content-between align-items-center">
         <h1 class="flex-wrap">Your&nbsp;Workouts</h1>
-        <a class="create-workout-btn flex-wrap p-2 rounded-3 shadow-sm text-decoration-none text-primary bg-accent" href="/workouts/new">
-          <i class="bi bi-plus me-1"></i><span class="d-none d-md-inline">NEW&nbsp;WORKOUT</span>
-        </a>
+
+        <div class="d-flex gap-2">
+
+          <!-- CREATE WORKOUT btn -->
+          <a class="create-workout-btn flex-wrap p-2 rounded-3 shadow-sm text-decoration-none text-primary bg-accent" href="/workouts/new">
+            <i class="bi bi-plus me-1"></i><span class="d-none d-md-inline">NEW&nbsp;WORKOUT</span>
+          </a>
+          
+          <!-- user profile dropdown (show on large screens only) -->
+          <div class="dropdown d-none d-lg-block ms-auto">
+            <a 
+              href="#" 
+              class="d-flex justify-content-center align-items-center text-decoration-none text-primary shadow-sm user-profile"
+              data-bs-toggle="dropdown" 
+              aria-expanded="false" 
+              id="profileDropdown"
+            >
+              <i class="bi bi-person-fill"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end m-0 p-0 mt-2 shadow-lg" aria-labelledby="profileDropdown">
+              <li>
+                <button class="dropdown-item ps-3 py-3 text-primary d-flex align-items-center" id="themeToggle">
+                  <i class="bi bi-box-arrow-in-right me-2" id="themeIcon"></i>
+                  <span id="themeText">login</span>
+                </button>
+              </li>
+              <li><hr class="dropdown-divider m-0 p-0" style="border-color: var(--divider);"></li>
+              <li>
+                <a class="dropdown-item ps-3 py-2 text-primary d-flex align-items-center" href="index.html">
+                  <i class="bi bi-house me-2"></i>my workouts
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item ps-3 py-2 text-primary d-flex align-items-center" href="blog.html">
+                  <i class="bi bi-journal-text me-2"></i>create workout
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item ps-3 py-2 text-primary d-flex align-items-center" href="form.html">
+                  <i class="bi bi-chat-dots me-2"></i>something else
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <hr class="mb-4" style="border-width: 3px;">

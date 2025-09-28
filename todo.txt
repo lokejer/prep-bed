@@ -1,0 +1,96 @@
+- login / register pages
+- save workout data to a database (MySQL) -> prevent data loss on server restart
+- track user profiles (saved workouts etc)
+- plot reps progress over time
+- plot weight progress over time
+- AI predicts upcoming weeks' progress, motivate me to stay consistent while giving me realistic progress goals
+
+
+✅ Core Features
+/
+/workouts
+/workouts/new
+/login
+
+1. Welcome Screen
+- Users input an alias (defaults to "User").
+- Alias is displayed on /workouts/new. (e.g. "Welcome back, NgSongHeng!")
+
+2. CREATE Workout
+- Users add exercises (name, weight, up to 3 sets of reps) via /workouts/new.
+- Exercises temporarily stored; user can add multiple before finalizing.
+- Finalizing workout attaches exercises to a workout object (with ID and date) and adds it to in-memory workouts array.
+
+3. View Workouts
+- /workouts lists all workouts with date, exercises, sets/reps.
+- Each workout and exercise has delete buttons; exercises also have edit buttons.
+
+4. EDIT Exercise
+- Users can update exercise name, weight, sets, and reps.
+- Cannot delete individual sets (can set reps to 0).
+
+5. DELETE Workout / Exercise
+- Delete entire workouts or individual exercises.
+- Handles “No Workouts Yet” placeholder.
+
+6. Testing / Developer Features
+- Console logs provide feedback for create/edit/delete operations — useful for debugging.
+- POST /dev-workout route automatically populates the /workouts page with sample workouts & exercises for testing.
+
+⚠️ Limitations
+- All data is in-memory; lost on server restart.
+- Frontend JS for placeholder message could be improved with EJS.
+
+
+======================================================================================================================================================
+======================================================================================================================================================
+
+
+Welcome Screen
+- User can input an alias. The /workouts/new page will reflect this alias (eg "Welcome back NgSongHeng!")
+- Handles empty inputs by defaulting to "User" (eg "Welcome back User!")
+
+CREATE a Workout
+- When User hits the POST /create-workout route, a new temporary currentWorkout object is created. Note: Workout = group of exercises
+- Each workout gets an auto-generated ID and that day's date.
+- User fills up the "Reps" input field for Set 1, 2 and/or 3.
+- User presses the "Add Exercise" button, hitting the POST /add-exercise route, adding the exercise details to a temporary exercises array.
+- A toast notification shows to assure the user their exercise has been saved successfully. 
+- All input fields are cleared, user stays on /workouts/new. User can continue adding exercises or end the workout.
+- User ends the workout, any pending exercises in the exercises array are attached to the currentWorkout object created in Step 1.
+- currentWorkout is added to the in-memory workouts array. The currentWorkout object is emptied
+- User redirected to /workouts to show their updated list of workouts.
+- Error handling for creating a workout with no exercises added to it.
+
+View All Workouts
+- The /workouts page lists all workouts stored in the workouts array (dynamic DOM rendering).
+- Each workout card shows:
+    The date of the workout.
+    "X" (delete) button for the workout.
+    All exercises inside that workout.
+    Edit, Delete buttons for each exercise
+    Each exercise’s name, sets and reps. (all can be edited)
+
+UPDATE an Exercise
+- Each exercise has an “Edit” button
+- Can edit the exercise name
+- Can edit the no. reps for existing sets
+- Can add new sets and reps
+- Cannot delete existing sets and reps (only can set no. reps to 0)
+
+DELETE a Workout
+- Each workout card has a "X" (delete) button (a form with _method=DELETE).
+- When clicked, it triggers router.delete('/workouts/:id') to remove that workout from the list.
+
+DELETE an Exercise
+- Individual exercises inside a Workout (aka a group of exercises) can be deleted using the same logic for Workout
+- Handles “No Workouts Yet” with a placeholder message
+(currently JS-based, but could be done cleaner with EJS conditions.)
+
+⚠️ Limitations (Work-in-Progress)
+Data Persistence: All workouts and exercises are stored in memory (arrays). Restarting the server wipes everything.
+Frontend Logic: Some JS logic (like hiding the "No workouts yet" message) still needs tuning. Can use consider using EJS routes
+
+👉 In short:
+Your app allows users to create, display, edit and delete their workouts and their details like exercise names, sets and reps.
+Data Persistence (like MySQL) isn’t implemented yet.

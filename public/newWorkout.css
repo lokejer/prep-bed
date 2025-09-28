@@ -17,5 +17,9 @@ input::placeholder {
 }
 
 .end-workout-btn {
-  border: 3px solid var(--t-color-accent);
+  border: 1px solid var(--t-color-accent);
+  transition: all 0.1s ease;
+}
+.end-workout-btn:hover {
+  background-color: hsla(16, 90%, 55%, 0.8) !important;
 }

@@ -1,0 +1,23 @@
+#loginForm input {
+  /* width: 100%; */
+  border: none;
+  border-bottom: 3px solid var(--elevated-surface);
+  background-color: transparent;
+  transition: border-bottom 0.16s ease;
+}
+#loginForm input:focus {
+  outline: none;
+  border-bottom: 3px solid var(--color-accent);
+}
+
+.valid-icon {
+  display: inline;
+  opacity: 0.2;
+  transition: all 0.2s ease;
+}
+
+.submit-btn {
+  width: fit-content;
+  border: none;
+  background-color: var(--color-accent);
+}

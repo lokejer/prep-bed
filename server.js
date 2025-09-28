@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
 app.post('/create-username', (req, res) => {
   let { username } = req.body;
   res.redirect(`/workouts/new?name=${encodeURIComponent(username)}`)

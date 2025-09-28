@@ -9,6 +9,20 @@
   text-decoration: underline !important;
 }
 
+/* user profile */
+.user-profile {
+  width: 40px; height: 100%;
+  font-size: 1.2rem;
+  border: 2px solid var(--elevated-surface);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.user-profile:hover,
+.user-profile[aria-expanded="true"] {
+  background-color: var(--color-accent) !important;
+  color: var(--text-heading) !important;
+}
+
 .workout-card {
   border-radius: 8px;
   background-color: var(--elevated-surface);
