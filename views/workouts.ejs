@@ -96,7 +96,7 @@
           <div class="mt-1 mb-3 p-3 shadow-lg workout-card">
             
             <!-- each workout's header -->
-            <h3 class="display-6">Workout on <%= w.date %>
+            <h3 class="display-6">Workout on <%= new Date(w.date).toLocaleDateString('en-GB') %>
               <form class="ms-auto d-inline float-end delete-workout-btn" action="/workouts/<%= w.id %>?_method=DELETE" method="POST">
                 <button type="submit"><i class="bi bi-x text-primary"></i></button>
               </form>
@@ -112,7 +112,7 @@
                     <%= exercise.weight === "BW" ? "" : "kg" %>
                   )
                 </span>
-                <form class="d-inline" action="/workouts/<%= w.id %>/edit-exercise/<%= exerciseIndex %>?_method=PUT" method="POST">
+                <form class="d-inline" action="/workouts/<%= w.id %>/edit-exercise/<%= exercise.id %>?_method=PUT" method="POST">
                   
                   <!-- button opens the edit exercise modal -->
                   <button 
@@ -121,7 +121,7 @@
                     data-bs-toggle="modal" 
                     data-bs-target="#editExerciseModal"
                     data-workout-id="<%= w.id %>"
-                    data-exercise-id="<%= exerciseIndex %>"
+                    data-exercise-id="<%= exercise.id %>"
                     data-exercise-name="<%= exercise.name %>"
                     data-exercise-weight="<%= exercise.weight %>"
                     data-set1-reps="<%= exercise.sets[0] ? exercise.sets[0].reps : '' %>"
@@ -133,7 +133,7 @@
                 </form>
 
                 <!-- button removes this exercise from this workout -->
-                <form class="d-inline" action="/workouts/<%= w.id %>/edit-exercise/<%= exerciseIndex %>?_method=DELETE" method="POST">
+                <form class="d-inline" action="/workouts/<%= w.id %>/edit-exercise/<%= exercise.id %>?_method=DELETE" method="POST">
                   <button class="delete-exercise-btn px-2 py-1 rounded-circle" type="submit"><i class="bi bi-trash3"></i></button>
                 </form>
               </h4>
