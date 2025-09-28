@@ -1,4 +1,4 @@
-const { pool, sequelize, DataTypes } = require('./db');
+const { pool, sequelize, DataTypes } = require('../config/db');
 
 const Workouts = {
     async create(date) {

@@ -1,4 +1,4 @@
-const { pool, sequelize, DataTypes } = require('./db');
+const { pool, sequelize, DataTypes } = require('../config/db');
 
 const Exercises = {
     async create(workoutId, { name, weight, set1, set2, set3 }) {
