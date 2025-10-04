@@ -1,13 +1,17 @@
-const mysql = require('mysql2/promise');
+const { Pool } = require('pg');
+require('dotenv').config();
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'lokej',
-    database: 'fitness_app',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+// Create connection pool for PostgreSQL (Supabase)
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
+
+// Test connection
+pool.query('SELECT NOW()')
+  .then(() => console.log('✅ Database connected successfully'))
+  .catch(err => console.error('❌ Database connection failed:', err.message));
 
 module.exports = pool;

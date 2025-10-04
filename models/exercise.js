@@ -1,31 +1,77 @@
 const pool = require('../config/db');
 
-const Exercises = {
-    async create(workoutId, { name, weight, set1, set2, set3 }) {
-        await pool.execute(
-            'INSERT INTO exercises (workout_id, name, weight, set1, set2, set3) VALUES (?, ?, ?, ?, ?, ?)',
-            [workoutId, name, weight, set1 || null, set2 || null, set3 || null]
-        );
-    },
-
-    async getByWorkout(workoutId) {
-        const [exercises] = await pool.execute(
-            'SELECT * FROM exercises WHERE workout_id = ?',
-            [workoutId]
-        );
-        return exercises;
-    },
-
-    async update(id, { name, weight, set1, set2, set3 }) {
-        await pool.execute(
-            'UPDATE exercises SET name=?, weight=?, set1=?, set2=?, set3=? WHERE id=?',
-            [name, weight, set1 || null, set2 || null, set3 || null, id]
-        );
-    },
-
-    async delete(id) {
-        await pool.execute('DELETE FROM exercises WHERE id=?', [id]);
+class Exercises {
+  // Get all exercises for a specific workout
+  static async getByWorkout(workoutId) {
+    try {
+      const result = await pool.query(
+        'SELECT * FROM exercises WHERE workout_id = $1 ORDER BY created_at ASC',
+        [workoutId]
+      );
+      return result.rows;
+    } catch (err) {
+      console.error('Error fetching exercises:', err);
+      throw err;
     }
-};
+  }
+
+  // Create new exercise
+  static async create(workoutId, exerciseData) {
+    try {
+      const { name, weight, set1, set2, set3 } = exerciseData;
+      const result = await pool.query(
+        'INSERT INTO exercises (workout_id, name, weight, set1, set2, set3) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+        [workoutId, name, weight, set1, set2, set3]
+      );
+      return result.rows[0].id;
+    } catch (err) {
+      console.error('Error creating exercise:', err);
+      throw err;
+    }
+  }
+
+  // Update exercise
+  static async update(exerciseId, exerciseData) {
+    try {
+      const { name, weight, set1, set2, set3 } = exerciseData;
+      const result = await pool.query(
+        'UPDATE exercises SET name = $1, weight = $2, set1 = $3, set2 = $4, set3 = $5 WHERE id = $6',
+        [name, weight, set1, set2, set3, exerciseId]
+      );
+      return result.rowCount > 0;
+    } catch (err) {
+      console.error('Error updating exercise:', err);
+      throw err;
+    }
+  }
+
+  // Delete exercise
+  static async delete(exerciseId) {
+    try {
+      const result = await pool.query(
+        'DELETE FROM exercises WHERE id = $1',
+        [exerciseId]
+      );
+      return result.rowCount > 0;
+    } catch (err) {
+      console.error('Error deleting exercise:', err);
+      throw err;
+    }
+  }
+
+  // Get single exercise by ID
+  static async getById(exerciseId) {
+    try {
+      const result = await pool.query(
+        'SELECT * FROM exercises WHERE id = $1',
+        [exerciseId]
+      );
+      return result.rows[0];
+    } catch (err) {
+      console.error('Error fetching exercise:', err);
+      throw err;
+    }
+  }
+}
 
 module.exports = Exercises;

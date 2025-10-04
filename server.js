@@ -1,5 +1,6 @@
 const express = require("express");
 const methodOverride = require("method-override");
+const path = require("path");
 const app = express();
 
 // to serve static pages in the public folder
@@ -12,6 +13,7 @@ app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 
 // set our default view engine to ejs
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {

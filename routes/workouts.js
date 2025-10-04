@@ -186,9 +186,6 @@ router.delete('/:id', async (req, res) => {
     console.error(err);
     res.status(500).send("Failed to delete workout. Please try again")
   }
-
-  console.log(`Workout deleted. ID: ${id}`);
-  res.redirect('/workouts');
 });
 
 // route for /workouts
