@@ -4,7 +4,7 @@ async function setupDatabase() {
   try {
     console.log('🚀 Starting database setup...');
 
-    // Create workouts table
+    // create workouts table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS workouts (
         id SERIAL PRIMARY KEY,
@@ -15,7 +15,7 @@ async function setupDatabase() {
     `);
     console.log('✅ Workouts table created');
 
-    // Create exercises table
+    // create exercises table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS exercises (
         id SERIAL PRIMARY KEY,

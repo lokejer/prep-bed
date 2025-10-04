@@ -2,7 +2,7 @@
   border: 2px dashed var(--text-primary);
   height: 400px; 
   color:red; 
-  background-color: hsla(210, 14%, 88%, 0.1);
+  background-color: hsla(204, 2%, 48%, 0.1);
 }
 
 .create-workout-btn:hover {

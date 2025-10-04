@@ -23,7 +23,7 @@
 
   <main>
 
-    <section class="position-relative container-fluid container-lg py-5 d-flex flex-column align-items-center">
+    <section class="position-relative container-fluid container-lg pt-5 d-flex flex-column align-items-center">
       
       <a class="back-to-workouts-link position-absolute top-0 start-0 m-3 text-decoration-none text-primary" href="/workouts">
         <i class="bi bi-arrow-up-left me-1"></i>WORKOUTS
@@ -76,6 +76,43 @@
 
     </section>
 
+    <section id="exercises-list" class="container-fluid container-lg py-5 d-flex flex-column align-items-center">
+
+      <div class="col-md-6 col-10 px-1 py-3">
+
+        <h3 class="display-5 m-0 p-0 text-heading d-flex align-items-center gap-2">
+          Exercises 
+          <span class="exercises-counter px-3"><%= exercises.length %></span>
+        </h3>
+        <hr class="m-0 p-0 mt-2 mb-3 rounded-5" style="border: 3px solid var(--color-accent);">
+
+        <!-- placeholder message -->
+        <% if (exercises.length === 0) { %>
+          <p class="py-1 text-secondary" id="empty-exercise-placeholder">added exercises will appear here...</p>
+        <% } %>
+        
+        <% exercises.forEach(e => { %>
+
+          <div class="row py-2">
+            <div class="col-md-6 col-12">
+              <h5><%= e.name %> &#40;<%= e.weight ? e.weight : '-' %>&#41;</h5>
+            </div>
+
+            <div class="col-md-6 col-12 d-flex flex-wrap justify-content-md-end">
+              <span class="me-1 text-secondary"><%= e.sets[0].reps %> /</span>
+              <span class="me-1 text-secondary"><%= e.sets[1] ? e.sets[1].reps : '-' %> /</span>
+              <span class="text-secondary"><%= e.sets[2] ? e.sets[2].reps : '-' %></span>
+            </div>
+
+          </div>
+          <hr class="m-0 p-0 mb-3" style="border: 2px solid var(--t-color-accent);">
+
+        <% }) %>
+
+      </div>
+
+    </section>
+
   </main>
 
   <!-- toast container (successfully added exercise notification) -->
@@ -84,7 +121,7 @@
     <div id="exerciseToast" class="toast align-items-center text-bg-success border-0 bg-opacity-75" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body">
-          Exercise added successfully!
+          Exercise added successfully! <a class="ms-1" href="#exercises-list">View</a>
         </div>
         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>

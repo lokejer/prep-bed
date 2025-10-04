@@ -23,3 +23,13 @@ input::placeholder {
 .end-workout-btn:hover {
   background-color: hsla(16, 90%, 55%, 0.8) !important;
 }
+
+.exercises-counter {
+  font-size: 1.5rem;
+  border-radius: 64px;
+  background-color: var(--elevated-surface);
+}
+
+.exercise-list-item {
+  background-color: var(--t-color-accent);
+}

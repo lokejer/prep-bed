@@ -1,7 +1,7 @@
 const pool = require('../config/db');
 
 class Exercises {
-  // Get all exercises for a specific workout
+  // GET all exercises for a specific workout
   static async getByWorkout(workoutId) {
     try {
       const result = await pool.query(
@@ -10,27 +10,27 @@ class Exercises {
       );
       return result.rows;
     } catch (err) {
-      console.error('Error fetching exercises:', err);
+      console.error('❌ ERROR fetching exercises:', err);
       throw err;
     }
   }
 
-  // Create new exercise
+  // CREATE new exercise
   static async create(workoutId, exerciseData) {
     try {
-      const { name, weight, set1, set2, set3 } = exerciseData;
+      const { name, weight, set1, set2, set3 } = exerciseData; // exerciseData is an object, this line labels each value inside the object.
       const result = await pool.query(
         'INSERT INTO exercises (workout_id, name, weight, set1, set2, set3) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
         [workoutId, name, weight, set1, set2, set3]
       );
       return result.rows[0].id;
     } catch (err) {
-      console.error('Error creating exercise:', err);
+      console.error('❌ ERROR creating exercise:', err);
       throw err;
     }
   }
 
-  // Update exercise
+  // UPDATE exercise
   static async update(exerciseId, exerciseData) {
     try {
       const { name, weight, set1, set2, set3 } = exerciseData;
@@ -40,12 +40,12 @@ class Exercises {
       );
       return result.rowCount > 0;
     } catch (err) {
-      console.error('Error updating exercise:', err);
+      console.error('❌ ERROR updating exercise:', err);
       throw err;
     }
   }
 
-  // Delete exercise
+  // DELETE exercise
   static async delete(exerciseId) {
     try {
       const result = await pool.query(
@@ -54,12 +54,12 @@ class Exercises {
       );
       return result.rowCount > 0;
     } catch (err) {
-      console.error('Error deleting exercise:', err);
+      console.error('❌ ERROR deleting exercise:', err);
       throw err;
     }
   }
 
-  // Get single exercise by ID
+  // GET single exercise by ID
   static async getById(exerciseId) {
     try {
       const result = await pool.query(
@@ -68,7 +68,7 @@ class Exercises {
       );
       return result.rows[0];
     } catch (err) {
-      console.error('Error fetching exercise:', err);
+      console.error('❌ ERROR fetching exercise:', err);
       throw err;
     }
   }
